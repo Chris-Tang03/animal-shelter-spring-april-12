@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome to Animal Shelter</title>
+
+    <link rel="stylesheet" href="../static/styles.css" th:href="@{/styles.css}" />
+</head>
+<body>
+
+<h1>What animal would you like to add? </h1>
+
+<form action="index.html" th:action="@{newAnimal.html}" method="get">
+    Please choose an animal
+    <select name = "species">
+        <option name="dog" type="text" value="dog">dog</option>
+        <option name="cat" type="text" value="cat">cat</option>
+    </select><br/>
+
+    Enter animal's breed <input type = "text" name = "breed" value=""/> <br/>
+    Enter animal's description <input type = "text" name = "description" value=""/> <br/>
+
+    <button> Submit </button>
+
+
+
+</form>
+
+<img src="../static/dog.jpg" th:src="@{/dog.jpg}"/>
+
+</body>
+</html>

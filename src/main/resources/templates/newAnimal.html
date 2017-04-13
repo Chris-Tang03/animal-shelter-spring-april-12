@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>New Animal</title>
+</head>
+<body>
+
+<h1>You've chosen</h1>
+
+<form action="index.html" method="post">
+    <table>
+        <tr th:each="newanimal : ${animal}">
+            <td th:text="${newanimal.getName()}">Cosmo</td>
+            <td th:text="${newanimal.getSpecies()}">Harper</td>
+            <td th:text="${newanimal.getBreed()}">Cosmo</td>
+            <td th:text="${newanimal.getDescription()}">Cosmo</td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
