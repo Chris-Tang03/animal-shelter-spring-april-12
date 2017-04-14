@@ -8,25 +8,69 @@
 </head>
 <body>
 
-<h1>What animal would you like to add? </h1>
+<div class="navbar">
+    <a href="index.html" th:href="@{/}">Home</a>
+    <a href="editAnimal.html" th:href="@{/editAnimal.html}">Add an Animal</a>
+</div>
 
-<form action="index.html" th:action="@{newAnimal.html}" method="get">
-    Please choose an animal
-    <select name = "species">
-        <option name="dog" type="text" value="dog">dog</option>
-        <option name="cat" type="text" value="cat">cat</option>
-    </select><br/>
+<br />
 
-    Enter animal's breed <input type = "text" name = "breed" value=""/> <br/>
-    Enter animal's description <input type = "text" name = "description" value=""/> <br/>
+<h1>Welcome to Animal Shelter!</h1>
 
-    <button> Submit </button>
+<br />
+
+<div class="animal-edit">
+    <form action="index.html" th:action="@{editAnimal.html}" method="get">
+        Please choose an animal to edit
+        <select name = "species">
+            <option name="dog" type="text" value="dog">dog</option>
+            <option name="cat" type="text" value="cat">cat</option>
+        </select><br/>
+
+        Enter animal's breed <input type = "text" name = "breed" value=""/> <br/>
+        Enter animal's description <input type = "text" name = "description" value=""/> <br/>
+
+        <button> Submit </button>
 
 
 
-</form>
+    </form>
+</div>
 
-<img src="../static/dog.jpg" th:src="@{/dog.jpg}"/>
+
+<table>
+    <tr th:each="animal : ${editAnimal}">
+        <td th:text="${editAnimal.getName()}">Zar</td>
+        <td th:text="${editAnimal.getSpecies()}">Dog</td>
+        <td>
+            <a href="editAnimal.html" th:href="@{/editAnimal?animal_id=} + ${animal.getAnimal_id()}">Edit</a>
+        </td>
+    </tr>
+    <tr th:remove="all">
+        <td>Patsy</td>
+        <td>Scottish Fold</td>
+        <td><a href="editAnimal.html">Edit</a></td>
+
+    </tr>
+</table>
+
+
+
+<div class="img">
+    <a th:href="@{'/list'}">
+        <img class="img1" src="../static/dog.jpg" th:src="@{'dog.jpg'}" />
+    </a>
+</div>
+
+<!--<table>-->
+    <!--<tr th:each="newanimal : ${animals}">-->
+        <!--<td th:text="${newanimal.getName()}">Zar</td>-->
+        <!--<td th:text="${newanimal.getSpecies()}">Dog</td>-->
+        <!--<td th:text="${newanimal.getBreed()}">Labrador</td>-->
+        <!--<td th:text="${newanimal.getDescription()}">Golden</td>-->
+    <!--</tr>-->
+<!--</table>-->
+
 
 </body>
 </html>

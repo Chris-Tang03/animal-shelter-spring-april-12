@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,9 +16,11 @@ public class AnimalRepo {
     @Autowired
     JdbcTemplate template;
 
-    public List<Animal> listAnimals(String search){
+    public List<Animal> listAnimals(){
+        ArrayList<Animal> animalList = new ArrayList<>();
         return template.query("SELECT * FROM animal",
                 (rs, row) -> new Animal(
+                rs.getInt("animal_id"),
                 rs.getString("name"),
                 rs.getString("species"),
                 rs.getString("breed"),
@@ -26,10 +29,10 @@ public class AnimalRepo {
         );
     }
 
-    public void insertAnimal(Animal animal) throws SQLException {
+    public void editAnimal(Animal animal) throws SQLException {
         template.execute("INSERT INTO animal" +
                 "name, species, breed, description " +
-                "VALUES " +
+                "VALUES (? , ? , ? , ?)" +
                 "animal.getName(), animal.getSpecies(), animal.getBreed, player.getDescription");
     }
 

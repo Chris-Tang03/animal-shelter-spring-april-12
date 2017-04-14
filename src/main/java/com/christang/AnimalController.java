@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AnimalController {
@@ -13,15 +12,18 @@ public class AnimalController {
     AnimalRepo animalRepo;
 
     @RequestMapping ("/")
-    public String viewHomePage() {
+    public String viewHomePage(Model model) {
+        model.addAttribute("animals", animalRepo.listAnimals());
         return "index";
     }
 
-    @RequestMapping ("/newAnimal")
-    public String createAnimal(Model model, String search){
-        model.addAttribute("animal", animalRepo.listAnimals(search));
-        model.addAttribute("search", search);
-        return "newAnimal";
+    @RequestMapping ("/editAnimal")
+    public String editAnimal(Model model, String name, String breed, String description){
+        model.addAttribute("name",name);
+        model.addAttribute("description",description);
+        model.addAttribute("breed", breed);
+        model.addAttribute("animals", animalRepo.listAnimals());
+        return "editAnimal";
     }
 
 }
